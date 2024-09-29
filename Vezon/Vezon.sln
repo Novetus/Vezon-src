@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VezonCore", "VezonCore\VezonCore.csproj", "{A4A87909-CA36-459D-A402-80A555011D53}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VezonLoader", "VezonLoader\VezonLoader.csproj", "{018F8CB9-0EA8-4893-AA45-95ADBAD3A5C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{13342EEB-BA5C-42BB-A2CF-D484DF9DAD66}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{A91294E5-B1BF-459C-8EF4-5F7B71A569F0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4A87909-CA36-459D-A402-80A555011D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4A87909-CA36-459D-A402-80A555011D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4A87909-CA36-459D-A402-80A555011D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4A87909-CA36-459D-A402-80A555011D53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{018F8CB9-0EA8-4893-AA45-95ADBAD3A5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{018F8CB9-0EA8-4893-AA45-95ADBAD3A5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{018F8CB9-0EA8-4893-AA45-95ADBAD3A5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{018F8CB9-0EA8-4893-AA45-95ADBAD3A5C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A4A87909-CA36-459D-A402-80A555011D53} = {13342EEB-BA5C-42BB-A2CF-D484DF9DAD66}
+		{018F8CB9-0EA8-4893-AA45-95ADBAD3A5C5} = {13342EEB-BA5C-42BB-A2CF-D484DF9DAD66}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE8C6C55-E474-4137-B2F3-60048418151F}
+	EndGlobalSection
+EndGlobal

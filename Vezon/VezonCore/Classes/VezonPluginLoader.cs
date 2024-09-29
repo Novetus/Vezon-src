@@ -13,10 +13,10 @@ namespace VezonCore
 
         public VezonPluginLoader()
         {
-            Console.WriteLine($"Loading plugins...");
+            _G.WriteLine($"Loading extensions...");
             LoadedExtensions = new List<IVezonExtension>();
             LoadPlugins();
-            Console.WriteLine($"Plugins loaded.");
+            _G.WriteLine($"Extensions loaded.");
         }
 
         public void LoadPlugins()
@@ -24,33 +24,45 @@ namespace VezonCore
             var loaders = new List<PluginLoader>();
 
             // create plugin loaders
-            var pluginsDir = Path.Combine(AppContext.BaseDirectory, "plugins");
-            foreach (var dir in Directory.GetDirectories(pluginsDir))
+            var pluginsDir = Path.Combine(AppContext.BaseDirectory, "extensions");
+
+            if (Directory.Exists(pluginsDir))
             {
-                var dirName = Path.GetFileName(dir);
-                var pluginDll = Path.Combine(dir, dirName + ".dll");
-                if (File.Exists(pluginDll))
+                foreach (var dir in Directory.GetDirectories(pluginsDir))
                 {
-                    var loader = PluginLoader.CreateFromAssemblyFile(
-                        pluginDll,
-                        sharedTypes: new[] { typeof(IVezonExtension) });
-                    loaders.Add(loader);
+                    var dirName = Path.GetFileName(dir);
+                    var pluginDll = Path.Combine(dir, dirName + ".dll");
+                    if (File.Exists(pluginDll))
+                    {
+                        var loader = PluginLoader.CreateFromAssemblyFile(
+                            pluginDll,
+                            sharedTypes: new[] { typeof(IVezonExtension) });
+                        loaders.Add(loader);
+                    }
+                }
+
+                // Create an instance of plugin types
+                foreach (var loader in loaders)
+                {
+                    foreach (var pluginType in loader
+                        .LoadDefaultAssembly()
+                        .GetTypes()
+                        .Where(t => typeof(IVezonExtension).IsAssignableFrom(t) && !t.IsAbstract))
+                    {
+                        // This assumes the implementation of IPlugin has a parameterless constructor
+                        IVezonExtension? plugin = (IVezonExtension?)Activator.CreateInstance(pluginType) ?? null;
+                        if (plugin != null)
+                        {
+                            LoadedExtensions.Add(plugin);
+                            _G.WriteLine($"Loaded '{LoadedExtensions.IndexOf(plugin)}'.");
+                        }
+                    }
                 }
             }
-
-            // Create an instance of plugin types
-            foreach (var loader in loaders)
+            else
             {
-                foreach (var pluginType in loader
-                    .LoadDefaultAssembly()
-                    .GetTypes()
-                    .Where(t => typeof(IVezonExtension).IsAssignableFrom(t) && !t.IsAbstract))
-                {
-                    // This assumes the implementation of IPlugin has a parameterless constructor
-                    IVezonExtension plugin = (IVezonExtension)Activator.CreateInstance(pluginType);
-                    LoadedExtensions.Add(plugin);
-                    Console.WriteLine($"Loaded '{LoadedExtensions.IndexOf(plugin)}'.");
-                }
+                _G.WriteLine($"Cannot load extensions: The {pluginsDir} folder is missing. The folder will be created for future loads.");
+                Directory.CreateDirectory(pluginsDir);
             }
         }
     }
