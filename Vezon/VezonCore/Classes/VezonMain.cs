@@ -12,7 +12,7 @@ namespace VezonCore
 
         public void Main()
         {
-            _G.WriteLine($"Project Vezon Version {Assembly.GetEntryAssembly()!.GetName().Version}");
+            _G.WriteLine($"{_G.ProjectName} Version {Assembly.GetEntryAssembly()!.GetName().Version}");
 
             if (VezonLoader != null)
             {
@@ -20,22 +20,28 @@ namespace VezonCore
 
                 while (!exit)
                 {
-                    if (PluginLoader!.LoadedExtensions.Any())
+                    foreach (var loader in PluginLoader.LoadedExtensionLoaders)
                     {
-                        PluginLoader!.LoadedExtensions.ForEach(extension =>
+                        // This assumes the implementation of IPlugin has a parameterless constructor
+                        IVezonExtension? plugin = PluginLoader.GetPluginForLoader(loader);
+                        if (plugin != null)
                         {
-                            extension.OnThink();
-                        });
+                            plugin.OnThink();
+                        }
                     }
                 }
 
-                if (PluginLoader!.LoadedExtensions.Any())
+                foreach (var loader in PluginLoader.LoadedExtensionLoaders)
                 {
-                    PluginLoader!.LoadedExtensions.ForEach(extension =>
+                    // This assumes the implementation of IPlugin has a parameterless constructor
+                    IVezonExtension? plugin = PluginLoader.GetPluginForLoader(loader);
+                    if (plugin != null)
                     {
-                        extension.OnShutdown();
-                    });
+                        plugin.OnShutdown();
+                    }
                 }
+
+                PluginLoader.UnloadPlugins();
             }
         }
 
