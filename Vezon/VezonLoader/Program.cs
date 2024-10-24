@@ -1,4 +1,5 @@
-﻿using VezonCore;
+﻿using System.Reflection;
+using VezonCore;
 
 namespace VezonLoader
 {
@@ -12,6 +13,8 @@ namespace VezonLoader
 
         void OnBoot(string[] args)
         {
+            _G.WriteLine($"{_G.ProjectName} {_G.LoadTranslatedString("Version")} {Assembly.GetEntryAssembly()!.GetName().Version}");
+            _G.WriteLine("Main Class loading....");
             _G.VezonInstance.VezonLoader = this;
             _G.VezonInstance.Main();
         }

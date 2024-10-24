@@ -24,7 +24,7 @@ namespace VezonCore
             if (!LoadedExtensionLoaders.Any())
             {
                 // create plugin loaders
-                var pluginsDir = Path.Combine(AppContext.BaseDirectory, "extensions");
+                var pluginsDir = FileManagement.ExtensionPath;
 
                 if (Directory.Exists(pluginsDir))
                 {

@@ -12,8 +12,6 @@ namespace VezonCore
 
         public void Main()
         {
-            _G.WriteLine($"{_G.ProjectName} Version {Assembly.GetEntryAssembly()!.GetName().Version}");
-
             if (VezonLoader != null)
             {
                 PluginLoader = new VezonPluginLoader();
