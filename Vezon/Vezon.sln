@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{13342EEB-B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{A91294E5-B1BF-459C-8EF4-5F7B71A569F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VezonTestPlugin", "VezonTestPlugin\VezonTestPlugin.csproj", "{355DE893-4888-4A3F-AD50-E5BF917FAA27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VezonTestPlugin", "VezonTestPlugin\VezonTestPlugin.csproj", "{355DE893-4888-4A3F-AD50-E5BF917FAA27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VezonLoader_Console", "VezonLoader_Console\VezonLoader_Console.csproj", "{1F242684-B9F1-4F16-898D-54EE4348702A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{355DE893-4888-4A3F-AD50-E5BF917FAA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{355DE893-4888-4A3F-AD50-E5BF917FAA27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{355DE893-4888-4A3F-AD50-E5BF917FAA27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F242684-B9F1-4F16-898D-54EE4348702A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F242684-B9F1-4F16-898D-54EE4348702A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F242684-B9F1-4F16-898D-54EE4348702A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F242684-B9F1-4F16-898D-54EE4348702A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{A4A87909-CA36-459D-A402-80A555011D53} = {13342EEB-BA5C-42BB-A2CF-D484DF9DAD66}
 		{018F8CB9-0EA8-4893-AA45-95ADBAD3A5C5} = {13342EEB-BA5C-42BB-A2CF-D484DF9DAD66}
 		{355DE893-4888-4A3F-AD50-E5BF917FAA27} = {A91294E5-B1BF-459C-8EF4-5F7B71A569F0}
+		{1F242684-B9F1-4F16-898D-54EE4348702A} = {13342EEB-BA5C-42BB-A2CF-D484DF9DAD66}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE8C6C55-E474-4137-B2F3-60048418151F}

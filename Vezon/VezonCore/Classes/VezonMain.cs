@@ -3,7 +3,7 @@
     public class Vezon
     {
         bool exit = false;
-        public IVezonLoader? VezonLoader { get; set; } = null;
+        public VezonLoader? VezonLoader { get; set; } = null;
         public VezonPluginLoader? PluginLoader { get; set; } = null;
 
         public void Main()

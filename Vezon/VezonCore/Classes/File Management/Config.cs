@@ -7,7 +7,7 @@ namespace VezonCore
     {
         public static readonly string ConfigPath = Path.Combine(Global.Locations.Config, $"config.json");
 
-        public JsonObject? Values { get; set; } = new JsonObject();
+        public JsonObject? Values { get; set; }
 
         public Config(string languageName)
         {
@@ -18,10 +18,7 @@ namespace VezonCore
             }
             else
             {
-                VezonJSONLoaderMultiElement ConfigLoader = new VezonJSONLoaderMultiElement(ConfigPath.Replace(".json", ""));
-                JsonNodeOptions options = new JsonNodeOptions();
-                options.PropertyNameCaseInsensitive = true;
-                Values = JsonObject.Create(ConfigLoader.Root, options);
+                Load();
             }
         }
 
@@ -47,12 +44,22 @@ namespace VezonCore
 
         public virtual string ReadValue(string key)
         {
+            Load();
+
             if (Values != null)
             {
                 return Values["Values"][key].ToString();
             }
 
             return "";
+        }
+
+        public void Load()
+        {
+            VezonJSONLoaderMultiElement ConfigLoader = new VezonJSONLoaderMultiElement(ConfigPath.Replace(".json", ""));
+            JsonNodeOptions options = new JsonNodeOptions();
+            options.PropertyNameCaseInsensitive = true;
+            Values = JsonObject.Create(ConfigLoader.Root, options);
         }
 
         public void Save() 
