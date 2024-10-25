@@ -39,9 +39,9 @@ public class FileManagement
         return result;
     }
 
-    public static string LoadTranslatedElementString(JsonElement element, string name)
+    public static string? LoadTranslatedElementString(JsonElement element, string name)
     {
         JsonElement untranslated = LoadElementProperty(element, name);
-        return _G.LoadTranslatedString(untranslated.ToString());
+        return _G.CurLanguage?.LoadTranslatedString(untranslated.ToString());
     }
 }

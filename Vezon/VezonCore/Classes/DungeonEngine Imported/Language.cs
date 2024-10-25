@@ -27,11 +27,18 @@ public class Language
         Values = FileManagement.LoadElementProperty(Root, "Values");
     }
 
-    public virtual string TranslateString(string propertyName)
+    public virtual string LoadTranslatedString(string untranslated)
     {
-        JsonElement jsonResult = FileManagement.LoadElementProperty(Values, propertyName);
+        JsonElement jsonResult = FileManagement.LoadElementProperty(Values, untranslated);
         string result = jsonResult.ToString();
-        return result;
+        if (!string.IsNullOrEmpty(result))
+        {
+            return result;
+        }
+        else
+        {
+            return untranslated;
+        }
     }
 }
 
