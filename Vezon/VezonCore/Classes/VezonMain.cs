@@ -1,8 +1,4 @@
-﻿using McMaster.NETCore.Plugins;
-using System.Diagnostics;
-using System.Reflection;
-
-namespace VezonCore
+﻿namespace VezonCore
 {
     public class Vezon
     {

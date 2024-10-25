@@ -1,5 +1,4 @@
-﻿
-namespace VezonCore
+﻿namespace VezonCore
 {
     public interface IVezonLoader
     {
