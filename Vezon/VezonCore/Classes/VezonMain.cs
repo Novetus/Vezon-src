@@ -45,7 +45,7 @@ namespace VezonCore
 
         public void Kill()
         {
-            _G.WriteLine($"Exiting...");
+            Global.WriteLine($"Exiting...");
             exit = true;
         }
     }

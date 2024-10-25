@@ -19,24 +19,16 @@ namespace VezonTestPlugin
         }
         public virtual void OnLoad() 
         {
-            _G.WriteLine("test");
+            Global.Cfg.WriteValue("Test", "Test Works");
+            Global.WriteLine(Global.Cfg.ReadValue("Test"));
         }
         public virtual void OnShutdown() 
         {
-            _G.WriteLine("shutdown");
+            Global.WriteLine("shutdown");
         }
         public virtual void OnThink() 
         {
-            _G.WriteLine("gay");
-
-            foreach (var i in _G.VezonInstance.PluginLoader!.LoadedExtensionLoaders)
-            {
-                IVezonExtension? plugin = _G.VezonInstance.PluginLoader!.GetPluginForLoader(i);
-                if (plugin != null)
-                {
-                    _G.WriteLine($"List has {plugin.Name()}");
-                }
-            }
+            
         }
     }
 }

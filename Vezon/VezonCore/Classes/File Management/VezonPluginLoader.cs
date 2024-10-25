@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static VezonCore.Vezon;
 
 namespace VezonCore
 {
@@ -13,10 +14,10 @@ namespace VezonCore
 
         public VezonPluginLoader()
         {
-            _G.WriteLine($"Loading extensions...");
+            Global.WriteLine($"Loading extensions...");
             LoadedExtensionLoaders = new List<PluginLoader>();
             LoadPlugins();
-            _G.WriteLine($"Extensions loaded.");
+            Global.WriteLine($"Extensions loaded.");
         }
 
         public void LoadPlugins()
@@ -24,7 +25,7 @@ namespace VezonCore
             if (!LoadedExtensionLoaders.Any())
             {
                 // create plugin loaders
-                var pluginsDir = FileManagement.ExtensionPath;
+                var pluginsDir = Global.Locations.Extension;
 
                 if (Directory.Exists(pluginsDir))
                 {
@@ -44,13 +45,14 @@ namespace VezonCore
                         IVezonExtension? plugin = GetPluginForLoader(loader);
                         if (plugin != null)
                         {
-                            _G.WriteLine($"Loaded '{plugin.Name()}' by '{plugin.Author()}'.");
+                            Global.WriteLine($"Loaded '{plugin.Name()}' by '{plugin.Author()}'.");
+                            plugin.OnLoad();
                         }
                     }
                 }
                 else
                 {
-                    _G.WriteLine($"Cannot load extensions: The {pluginsDir} folder is missing. The folder will be created for future loads.");
+                    Global.WriteLine($"Cannot load extensions: The {pluginsDir} folder is missing. The folder will be created for future loads.");
                     Directory.CreateDirectory(pluginsDir);
                 }
             }

@@ -13,10 +13,10 @@ namespace VezonLoader
 
         void OnBoot(string[] args)
         {
-            _G.WriteLine($"{_G.ProjectName} {_G.CurLanguage?.LoadTranslatedString("Inertia_Version")} {Assembly.GetEntryAssembly()!.GetName().Version}");
-            _G.WriteLine("Main Class loading....");
-            _G.VezonInstance.VezonLoader = this;
-            _G.VezonInstance.Main();
+            Global.WriteLine($"{Global.ProjectName} {Global.CurLanguage?.LoadValueString("Inertia_Version")} {Assembly.GetEntryAssembly()!.GetName().Version}");
+            Global.WriteLine("Main Class loading....");
+            Global.Instance.VezonLoader = this;
+            Global.Instance.Main();
         }
     }
 }
