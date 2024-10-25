@@ -9,7 +9,7 @@ public class Language
 
     public Language()
     {
-        string file = File.ReadAllText(FileManagement.GenerateJSONFilePath(Path.Combine(FileManagement.LanguagePath, $"{FileManagement.LangPrefix}english.json")));
+        string file = File.ReadAllText(FileManagement.GenerateJSONFilePath(Path.Combine(FileManagement.ResourcePath, $"{FileManagement.LangPrefix}english")));
         JsonDocument doc = JsonDocument.Parse(file);
         Root = doc.RootElement;
         Name = FileManagement.LoadElementProperty(Root, "Name").ToString();
@@ -19,7 +19,7 @@ public class Language
 
     public Language(string fileName)
     {
-        string file = File.ReadAllText(FileManagement.GenerateJSONFilePath(Path.Combine(FileManagement.LanguagePath, $"{FileManagement.LangPrefix}{fileName}.json")));
+        string file = File.ReadAllText(FileManagement.GenerateJSONFilePath(Path.Combine(FileManagement.ResourcePath, $"{FileManagement.LangPrefix}{fileName}")));
         JsonDocument doc = JsonDocument.Parse(file);
         Root = doc.RootElement;
         Name = FileManagement.LoadElementProperty(Root, "Name").ToString();

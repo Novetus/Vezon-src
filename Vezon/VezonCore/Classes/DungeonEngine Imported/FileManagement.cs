@@ -24,7 +24,6 @@ public class FileManagement
 
     public static string ExtensionPath = Path.Combine(AppContext.BaseDirectory, "extensions");
     public static string ResourcePath = Path.Combine(AppContext.BaseDirectory, "resource");
-    public static string LanguagePath = Path.Combine(AppContext.BaseDirectory, "languages");
 
     public static readonly string LangPrefix = $"{_G.ProjectShortName}_"; 
 
