@@ -7,6 +7,7 @@ namespace VezonCore
         public class Locations
         {
             public static string Extension = Path.Combine(AppContext.BaseDirectory, "extensions");
+            public static string ExtensionAddons = Path.Combine(Extension, "extension_addons");
             public static string Resource = Path.Combine(AppContext.BaseDirectory, "resource");
             public static string Config = Path.Combine(AppContext.BaseDirectory, "cfg");
         }

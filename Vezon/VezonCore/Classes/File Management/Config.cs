@@ -48,7 +48,10 @@ namespace VezonCore
 
             if (Values != null)
             {
-                return Values["Values"][key].ToString();
+                if (Values["Values"][key] != null)
+                {
+                    return Values["Values"][key].ToString();
+                }
             }
 
             return "";

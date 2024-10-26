@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{13342EEB-B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{A91294E5-B1BF-459C-8EF4-5F7B71A569F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VezonTestPlugin", "VezonTestPlugin\VezonTestPlugin.csproj", "{355DE893-4888-4A3F-AD50-E5BF917FAA27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VezonWebProxy", "VezonTestPlugin\VezonWebProxy.csproj", "{355DE893-4888-4A3F-AD50-E5BF917FAA27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VezonLoader_Console", "VezonLoader_Console\VezonLoader_Console.csproj", "{1F242684-B9F1-4F16-898D-54EE4348702A}"
 EndProject
