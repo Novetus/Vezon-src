@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net.Http.Headers;
 
 namespace VezonCore
 {
@@ -6,10 +7,11 @@ namespace VezonCore
     {
         public class Locations
         {
-            public static string Extension = Path.Combine(AppContext.BaseDirectory, "extensions");
+            public static string DataDir = Path.Combine(AppContext.BaseDirectory, "data");
+            public static string Extension = Path.Combine(DataDir, "extensions");
             public static string ExtensionAddons = Path.Combine(Extension, "extension_addons");
-            public static string Resource = Path.Combine(AppContext.BaseDirectory, "resource");
-            public static string Config = Path.Combine(AppContext.BaseDirectory, "cfg");
+            public static string Resource = Path.Combine(DataDir, "resource");
+            public static string Config = Path.Combine(DataDir, "cfg");
         }
 
         public static VezonJSONLoaderMultiElement Info = new VezonJSONLoaderMultiElement(Path.Combine(Locations.Config, $"info"));

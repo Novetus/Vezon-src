@@ -31,8 +31,6 @@ namespace VezonWebProxy
 
         public override void OnLoad() 
         {
-            base.OnLoad();
-
             bool result = ConvertSafe.ToBooleanSafe(Global.Cfg.ReadValue("WebProxyEnabled"));
             string Testresult = Global.Cfg.ReadValue("WebProxyEnabled");
 
@@ -51,8 +49,6 @@ namespace VezonWebProxy
             {
                 proxy.Stop();
             }
-
-            base.OnShutdown();
         }
     }
 }

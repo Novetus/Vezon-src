@@ -10,10 +10,11 @@ using Titanium.Web.Proxy.EventArguments;
 using Titanium.Web.Proxy.Http;
 using Titanium.Web.Proxy.Models;
 using VezonCore;
+using System.Reflection;
 
 namespace VezonWebProxy
 {
-    public class IWebProxyExtension : IVezonExtensionAddon
+    public class IWebProxyExtension
     {
         public virtual void OnProxyStart() { }
         public virtual void OnProxyStopped() { }
@@ -58,21 +59,22 @@ namespace VezonWebProxy
 
                 Server.Start();
 
-                foreach (ProxyEndPoint endPoint in Server.ProxyEndPoints)
-                {
-                    Server.SetAsSystemProxy(end, ProxyProtocolType.AllHttp);
-                }
+                //add a transparent end point to allow user to access internet.
+                TransparentProxyEndPoint transparentEndPoint = new TransparentProxyEndPoint(IPAddress.Any, WebProxyPort+1, true);
+                Server.AddEndPoint(transparentEndPoint);
+
+                Server.SetAsSystemHttpProxy(end);
+                Server.SetAsSystemHttpsProxy(end);
 
                 Global.WriteLine("Web Proxy started on port " + WebProxyPort);
 
                 try
                 {
-                    foreach (IVezonExtensionAddon extension in Parent.Manager.GetExtensionList().ToArray())
+                    foreach (IWebProxyExtension extension in Parent.GetInstancesOfImplementingTypes<IWebProxyExtension>())
                     {
-                        IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
-                        if (webProxyExtension != null)
+                        if (extension != null)
                         {
-                            webProxyExtension.OnProxyStart();
+                            extension.OnProxyStart();
                         }
                     }
                 }
@@ -127,16 +129,15 @@ namespace VezonWebProxy
 
             Uri uri = e.HttpClient.Request.RequestUri;
 
-            foreach (IVezonExtensionAddon extension in Parent.Manager.GetExtensionList().ToArray())
+            foreach (IWebProxyExtension extension in Parent.GetInstancesOfImplementingTypes<IWebProxyExtension>())
             {
-                IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
-                if (webProxyExtension != null)
+                if (extension != null)
                 {
-                    if (webProxyExtension.IsValidURL(uri.AbsolutePath.ToLowerInvariant(), uri.Host))
+                    if (extension.IsValidURL(uri.AbsolutePath.ToLowerInvariant(), uri.Host))
                     {
                         try
                         {
-                            await webProxyExtension.OnBeforeTunnelConnectRequest(sender, e);
+                            await extension.OnBeforeTunnelConnectRequest(sender, e);
                         }
                         catch (Exception)
                         {
@@ -161,16 +162,15 @@ namespace VezonWebProxy
 
                 Uri uri = e.HttpClient.Request.RequestUri;
 
-                foreach (IVezonExtensionAddon extension in Parent.Manager.GetExtensionList().ToArray())
+                foreach (IWebProxyExtension extension in Parent.GetInstancesOfImplementingTypes<IWebProxyExtension>())
                 {
-                    IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
-                    if (webProxyExtension != null)
+                    if (extension != null)
                     {
-                        if (webProxyExtension.IsValidURL(uri.AbsolutePath.ToLowerInvariant(), uri.Host))
+                        if (extension.IsValidURL(uri.AbsolutePath.ToLowerInvariant(), uri.Host))
                         {
                             try
                             {
-                                await webProxyExtension.OnRequest(sender, e);
+                                await extension.OnRequest(sender, e);
                                 return;
                             }
                             catch (Exception)
@@ -202,14 +202,13 @@ namespace VezonWebProxy
 
                 Global.WriteLine($"Web Proxy stopping on port {WebProxyPort}");
 
-                foreach (IVezonExtensionAddon extension in Parent.Manager.GetExtensionList().ToArray())
+                foreach (IWebProxyExtension extension in Parent.GetInstancesOfImplementingTypes<IWebProxyExtension>())
                 {
                     try
                     {
-                        IWebProxyExtension webProxyExtension = extension as IWebProxyExtension;
-                        if (webProxyExtension != null)
+                        if (extension != null)
                         {
-                            webProxyExtension.OnProxyStopped();
+                            extension.OnProxyStopped();
                         }
                     }
                     catch (Exception)
